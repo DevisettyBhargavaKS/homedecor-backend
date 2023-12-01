@@ -57,6 +57,7 @@ public class AppUser {
     @OneToMany(mappedBy = "appUser")
     private List<Address> addressList;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "appUser")
     private Vendor vendor;
 

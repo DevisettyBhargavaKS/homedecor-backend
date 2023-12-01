@@ -14,7 +14,7 @@ public class VendorDto {
 
         ArrayList<VendorRequest> vendorRequests = new ArrayList<>();
         for (Vendor vendor : vendors){
-            vendorRequests.add(new VendorRequest(vendor.getId(), vendor.getName()));
+//            vendorRequests.add(new VendorRequest(vendor.getId(), vendor.getUsername()));
         }
         vendorResponse.setVendors(vendorRequests);
         return vendorResponse;
@@ -24,7 +24,9 @@ public class VendorDto {
         if (vendorRequest.getId() != null) {
             vendor.setId(vendorRequest.getId());
         }
-        vendor.setName(vendorRequest.getName());
+        vendor.setUsername(vendorRequest.getUsername());
+        vendor.setTitle(vendorRequest.getTitle());
+
         return vendor;
     }
 }

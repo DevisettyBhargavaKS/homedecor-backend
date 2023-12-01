@@ -15,7 +15,7 @@ import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/user/product")
 //@PreAuthorize("hasRole('ROLE_USER')")
 @RolesAllowed(Role.USER)
 public class ProductController {

@@ -4,12 +4,14 @@ import com.CodeWithBhargav.dto.OrderDto;
 import com.CodeWithBhargav.exception.common.ResourceNotFoundException;
 import com.CodeWithBhargav.model.*;
 import com.CodeWithBhargav.repository.*;
+import com.CodeWithBhargav.request.OrderRequest;
 import com.CodeWithBhargav.response.OrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -21,6 +23,8 @@ public class OrderService {
     private CartRepository cartRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
     @Autowired
     private OrderedProductRepository orderedProductRepository;
     @Autowired
@@ -66,7 +70,7 @@ public class OrderService {
     }
 
     public List<OrderResponse> getUserOrders(Long userId) {
-        List<Order> orderList = (List<Order>) orderRepository.findUserOrder(userId)
+        List<Order> orderList = orderRepository.findUserOrder(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("userId", "userId", userId));
         return orderDto.mapToOrderResponse(orderList);
     }
@@ -93,6 +97,23 @@ public class OrderService {
 
         return getAllOrders();
     }
+
+//    public List<Order> findById(Long id) {
+//        List<Order> orderList = orderRepository.findByProductId(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("Ordered", "Ordered", id));
+//
+//        return orderList;
+//    }
+//
+//    public Order updateById(OrderRequest orderRequest) {
+//       Order order = orderDto.mapToApplied(orderRequest);
+//        Optional<Product> product = orderedProductRepository.findById(orderRequest.getProductId());
+//        AppUser appUser = userService.findUserById(orderRequest.getUserId());
+//        order.setAppUser(appUser);
+//        order.setProduct(product);
+//        orderRepository.save(order);
+//        return order;
+//    }
 }
 
 

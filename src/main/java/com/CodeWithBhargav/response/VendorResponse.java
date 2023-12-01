@@ -12,4 +12,6 @@ import java.util.List;
 @ToString
 public class VendorResponse {
     private List<VendorRequest> vendors = new ArrayList<>();
+
+
 }

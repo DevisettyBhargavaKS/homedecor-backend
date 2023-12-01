@@ -12,4 +12,5 @@ import lombok.Setter;
 public class OrderRequest {
     private Long userId;
     private Long addressId;
+    private long productId;
 }

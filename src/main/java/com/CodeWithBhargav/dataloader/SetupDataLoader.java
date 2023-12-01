@@ -12,6 +12,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -55,7 +56,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         alreadySetup = true;
     }
 
-    private void createStatus(String status) {orderStatusRepository.save(new OrderStatus(status));
+    private void createStatus(String status) {
+//        Optional<OrderStatus> pending = orderStatusRepository.findById(1L);
+//        Optional<OrderStatus> confirmed = orderStatusRepository.findById(2L);
+//        Optional<OrderStatus> delivery = orderStatusRepository.findById(3L);
+//        Optional<OrderStatus> delivered = orderStatusRepository.findById(4L);
+//
+//        if(pending==null)
+
+        orderStatusRepository.save(new OrderStatus(status));
     }
 
     @Transactional

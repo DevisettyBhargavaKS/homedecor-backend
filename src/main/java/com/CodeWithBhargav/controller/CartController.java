@@ -1,5 +1,6 @@
 package com.CodeWithBhargav.controller;
 
+import com.CodeWithBhargav.model.Cart;
 import com.CodeWithBhargav.model.Role;
 import com.CodeWithBhargav.request.CartRequest;
 import com.CodeWithBhargav.response.common.APIResponse;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -24,6 +27,7 @@ public class CartController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<APIResponse> getUsersCart(@PathVariable Long userId) {
+//        List<Cart> cartList = cartService.findAlLUserCart();
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(cartService.findUserCart(userId));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
@@ -36,12 +40,20 @@ public class CartController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{userId}/{bookCart}")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<APIResponse> deleteBookFromCart(@PathVariable Long userId,
                                                           @PathVariable Long bookCart) {
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(cartService.deleteFromCart(userId, bookCart));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+//    @PutMapping
+//    private ResponseEntity<APIResponse> updateCart(@Valid @RequestBody CartRequest cartRequest) {
+//        List<CartResponse> cartResponseList = cartService.updateCart(cartRequest);
+//        apiResponse.setStatus(HttpStatus.OK.value());
+//        apiResponse.setData(cartResponseList);
+//        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+//    }
 
 }

@@ -2,8 +2,10 @@ package com.CodeWithBhargav.controller.Admin;
 
 import com.CodeWithBhargav.model.AppUser;
 import com.CodeWithBhargav.model.Role;
+import com.CodeWithBhargav.model.Vendor;
 import com.CodeWithBhargav.response.common.APIResponse;
 import com.CodeWithBhargav.service.UserService;
+import com.CodeWithBhargav.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class AdminUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private VendorService vendorService;
+
     @GetMapping("/all")
     public ResponseEntity<APIResponse> getAllUsers() {
         List<AppUser> appUsers = userService.findAll();
@@ -33,4 +38,14 @@ public class AdminUserController {
         apiResponse.setData(appUsers);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @GetMapping("/vendor/all")
+    public ResponseEntity<APIResponse> getAllVendors() {
+        List<Vendor> vendors = vendorService.findAllVendors();
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(vendors);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+
 }

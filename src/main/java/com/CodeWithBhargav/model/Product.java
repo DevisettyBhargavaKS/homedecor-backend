@@ -35,9 +35,9 @@ public class Product {
 
     private boolean isApproved = false;
 
-    @Lob
-    @Column(name = "photo", columnDefinition="BLOB")
-    private byte[] photo;
+
+    @Column
+    private String photo;
 
     @JsonIgnore
     @ManyToOne
@@ -45,8 +45,16 @@ public class Product {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Cart> carts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product")
+    private  List<Order> orders=new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Vendor vendor;
 
 
     @CreationTimestamp
